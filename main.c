@@ -7,7 +7,7 @@
  *
  * Return: 0
  */
-int main(int ac, const char**av)
+int main(int ac, const char **av)
 {
 	int a = 0;
 
