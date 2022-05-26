@@ -7,16 +7,18 @@
 extern char **environ;
 
 /**
- * main - shell
+ * shell - receives and parses the command
+ * @cmd: command string
+ * @narg: command arguments
  *
- * Return: Always 0.
+ * Return: Nothing.
  */
-int main(void)
+void shell(char *cmd, char *narg[]);
 {
 	size_t n = 0;
-	char *narg[21], *tok, *cmd = (char *)malloc(sizeof(char) * 100);
-	char *a = (char *)malloc(sizeof(char) * 1024);
+	char *tok;	
 	int i = 0, j = 0;
+	char *a = (char *)malloc(sizeof(char) * 1024);
 
 	printf("aphrotee@2106~$ ");
 	getline(&a, &n, stdin);
@@ -29,24 +31,35 @@ int main(void)
 	}
 	narg[j] = NULL;
 	strcpy(cmd, narg[0]);
-	if (strcmp(cmd, "exit") == 0)
+}
+/**
+ * main - shell
+ *
+ * Return: Always 0.
+ */
+int main(void)
+{
+	char *narg[21], *cmd = (char *)malloc(sizeof(char) * 100);
+	int i = 0;
+	
+	while (1)
 	{
-		printf("!");
-		return (0);
-	}
-	if (fork() != 0)
-		wait(NULL);
-	else
-	{
-		i = execve(cmd, narg, environ);
-		if (i == -1)
+		shell(cmd, narg);
+		if (strcmp(cmd, "exit") == 0)
+			break;
+		if (fork() != 0)
+			wait(NULL);
+		else
 		{
-			strcpy(cmd, "/bin/");
-			strcat(cmd, narg[0]);
-			strcpy(narg[0], cmd);
 			i = execve(cmd, narg, environ);
+				if (i == -1)
+			{
+				strcpy(cmd, "/bin/");
+				strcat(cmd, narg[0]);
+				strcpy(narg[0], cmd);
+				i = execve(cmd, narg, environ);
+			}
 		}
 	}
-	main();
 	return(0);
 }
