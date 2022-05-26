@@ -13,11 +13,11 @@ extern char **environ;
  *
  * Return: Nothing.
  */
-void shell(char *cmd, char *narg[]);
+void shell(char *cmd, char *narg[])
 {
 	size_t n = 0;
-	char *tok;	
-	int i = 0, j = 0;
+	char *tok;
+	int j = 0;
 	char *a = (char *)malloc(sizeof(char) * 1024);
 
 	printf("aphrotee@2106~$ ");
@@ -41,7 +41,7 @@ int main(void)
 {
 	char *narg[21], *cmd = (char *)malloc(sizeof(char) * 100);
 	int i = 0;
-	
+
 	while (1)
 	{
 		shell(cmd, narg);
@@ -61,5 +61,5 @@ int main(void)
 			}
 		}
 	}
-	return(0);
+	return (0);
 }
