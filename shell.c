@@ -4,6 +4,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <stddef.h>
+extern char **environ;
 
 /**
  * main - shell
@@ -15,7 +16,6 @@ int main(void)
 	size_t n = 0;
 	char *narg[21], *tok, *cmd = (char *)malloc(sizeof(char) * 100);
 	char *a = (char *)malloc(sizeof(char) * 1024);
-	char *nenv[100] = {(char *)"PATH=/bin", 0};
 	int i = 0, j = 0;
 
 	printf("aphrotee@2106~$ ");
@@ -38,13 +38,13 @@ int main(void)
 		wait(NULL);
 	else
 	{
-		i = execve(cmd, narg, nenv);
+		i = execve(cmd, narg, environ);
 		if (i == -1)
 		{
 			strcpy(cmd, "/bin/");
 			strcat(cmd, narg[0]);
 			strcpy(narg[0], cmd);
-			i = execve(cmd, narg, nenv);
+			i = execve(cmd, narg, environ);
 		}
 	}
 	main();

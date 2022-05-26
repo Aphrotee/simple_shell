@@ -8,20 +8,18 @@
 extern char **environ;
 
 /**
- * main - concept excercises
- * @ac: argument counter
- * @av: argument array
- * @env: environtmental variables array
+ * main - prints environmental variables
  *
  * Return: 0 Always
  */
 int main(void)
 {
-	char *a, *b, *c;
+	int i = 0;
 
-	a = _getenv("HOME");
-	b = _getenv("_");
-	c = _getenv("LS_COLOURS");
-	printf("%s\n%s\n%s\n", a, b, c);
+	while (environ[i])
+	{
+		printf("%s\n", environ[i]);
+		i++;
+	}
 	return (0);
 }
