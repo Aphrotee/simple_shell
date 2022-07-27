@@ -20,7 +20,7 @@ void shell(char *cmd, char *narg[])
 	int j = 0;
 	char *a = (char *)malloc(sizeof(char) * 1024);
 
-	printf("aphrotee@2106~$ ");
+	printf("aphrotee@21~$ ");
 	getline(&a, &n, stdin);
 	tok = strtok(a, " \n");
 	while (tok != NULL)
